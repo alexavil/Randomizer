@@ -1,6 +1,10 @@
-let removeSelected;
+let hideInput = false;
+let removeSelected = false;
 
 window.onload = (ev => {
+    document.getElementById("input").hidden = hideInput;
+    document.getElementById("hide-input").checked = hideInput;
+    document.getElementById("rem-selected").checked = removeSelected;
     document.getElementById("spin").onclick = clickSpin
     document.getElementById("hide-input").addEventListener('change', () => {
         document.getElementById("input").hidden = document.getElementById("hide-input").checked
