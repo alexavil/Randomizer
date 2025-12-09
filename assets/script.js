@@ -11,17 +11,30 @@ window.onload = (ev => {
 })
 
 clickSpin = function() {
+    document.getElementById("spin").hidden = true
     let res = undefined;
     let choices = document.getElementById("input").value.split("\n");
     console.log(choices.length)
-    if (choices.length === 1 && choices[0] === "") res = "No input found!";
-    else {
-        let random = Math.floor(Math.random() * choices.length)
-        res = choices[random];
-        if (removeSelected === true) {
-            let change = choices.filter(line => !line.includes(res))
-            document.getElementById("input").value = change.join("\n")
-        }
+    if (choices.length === 1 && choices[0] === "") {
+        res = "No input found!";
+        document.getElementById("spin").hidden = false
+        document.getElementById("choice").innerText = res
     }
-    document.getElementById("choice").innerText = res
+    else {
+        let random = Math.floor(Math.random() * choices.length);
+        let rapid = setInterval(() => {
+            let randomRapid = Math.floor(Math.random() * choices.length);
+            document.getElementById("choice").innerText = choices[randomRapid]
+        }, 50)
+        setTimeout(() => {
+            clearInterval(rapid);
+            res = choices[random];
+            document.getElementById("spin").hidden = false
+            document.getElementById("choice").innerText = res
+            if (removeSelected === true) {
+                let change = choices.filter(line => !line.includes(res))
+                document.getElementById("input").value = change.join("\n")
+            }
+        }, 5000)
+    }
 }
