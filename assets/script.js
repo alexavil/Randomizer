@@ -2,15 +2,27 @@ let hideInput = false;
 let removeSelected = false;
 
 window.onload = (ev => {
-    document.getElementById("input").hidden = hideInput;
+    document.getElementById("inputbox").hidden = hideInput;
     document.getElementById("hide-input").checked = hideInput;
     document.getElementById("rem-selected").checked = removeSelected;
     document.getElementById("spin").onclick = clickSpin
     document.getElementById("hide-input").addEventListener('change', () => {
-        document.getElementById("input").hidden = document.getElementById("hide-input").checked
+        document.getElementById("inputbox").hidden = document.getElementById("hide-input").checked
     })
     document.getElementById("rem-selected").addEventListener('change', () => {
         removeSelected = document.getElementById("rem-selected").checked
+    })
+    document.getElementById("loader").addEventListener('change', (ev) => {
+        const file = ev.target.files[0];
+        const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById("input").value = e.target.result;
+            };
+            reader.onerror = (e) => {
+                console.error('Error reading file:', e.target.error);
+            };
+            reader.readAsText(file);
+
     })
 })
 

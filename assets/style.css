@@ -53,6 +53,16 @@ body {
   color: aliceblue;
   background-color: red; 
 }
+#inputbox {
+  resize: none;
+  margin: auto;
+  margin-right: 0;
+  margin-bottom: 1vmin;
+  width: auto;
+  height: auto;
+  font-size: 3vmin;
+  text-align: center;    
+}
 #input {
   background-color: #edd28f;
   background-size: contain;
@@ -65,4 +75,18 @@ body {
   height: auto;
   font-size: 3vmin;
   text-align: center;    
+}
+#loader {
+  background-color: #edd28f;
+  background-size: contain;
+  color: blueviolet;
+  resize: none;
+  margin: auto;
+  margin-right: 0;
+  margin-bottom: 1vmin;
+  width: auto;
+  height: auto;
+  font-size: 2vmin;
+  text-align: center; 
+  border: 1vmin black solid
 }
