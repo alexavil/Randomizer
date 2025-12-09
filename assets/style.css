@@ -1,6 +1,53 @@
-div {
-    border: 5px black solid;
+body {
+  display: grid;
+  background-size: cover;
+  overflow: hidden;
+  user-select: none;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
-p.choice {
-    text-align: center;
+#field {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: block;
+  margin: auto;
+  text-align: center;
+  align-content: center;
+  height: fit-content;
+  word-wrap: break-word;
+  white-space: normal;
+  width: fit-content;
+  font-size: 5vmax;
+}
+#settings {
+  display: block;
+  margin: auto;
+  margin-right: 0;
+  margin-bottom: 1vmin;
+  width: auto;
+  height: auto;
+  font-size: 3vmin;
+  text-align: center;
+}
+#spin {
+  margin: auto;
+  margin-right: 0;
+  margin-left: 0;
+  margin-bottom: 1vmin;
+  width: auto;
+  height: auto;
+  font-size: 3vmin;
+  text-align: center;    
+}
+#input {
+  resize: none;
+  margin: auto;
+  margin-right: 0;
+  margin-bottom: 1vmin;
+  width: auto;
+  height: auto;
+  font-size: 3vmin;
+  text-align: center;    
 }

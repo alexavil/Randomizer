@@ -11,12 +11,14 @@
     <title>Randomizer</title>
   </head>
   <body>
-    <textarea id="input"></textarea>
-    <div id="field">
-        <p id="choice">Test</p>
+    <div id="settings">
+        <input type="checkbox" id="hide-input">Hide input?
+        <input type="checkbox" id="rem-selected">Remove selected?
     </div>
-    <button id="spin">Spin</button>
-    <input type="checkbox" id="hide-input">Hide input?
-    <input type="checkbox" id="rem-selected">Remove selected?
+    <div id="field">
+        <p id="choice"></p>
+        <button id="spin">Spin</button>
+    </div>
+    <textarea id="input" rows="25"></textarea>
   </body>
 </html>
