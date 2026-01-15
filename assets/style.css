@@ -2,40 +2,68 @@ body {
   display: grid;
   background-image: url("bg.jpeg");
   background-size: cover;
+  background-position: center;
   overflow: hidden;
   user-select: none;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  place-items: center;
+  padding: 3vmin;
 }
 #field {
-  background: #beff3b;
   background: linear-gradient(90deg, rgba(190, 255, 59, 1) 0%, rgba(134, 181, 33, 1) 50%, rgba(237, 221, 83, 1) 100%);
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  display: block;
-  margin: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  align-content: center;
   word-wrap: break-word;
   white-space: normal;
   width: 80vmin;
   height: 40vmin;
   font-size: 8vmin;
-  border: 1vmin black solid;
+  border: 0.8vmin solid #000;
+  border-radius: 1.2vmin;
+  box-shadow: 0 1vmin 3vmin rgba(0,0,0,0.35);
+  overflow: hidden;
 }
 #settings {
+  position: absolute;
+  top: 2vmin;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1vmin;
+  align-items: center;
+  background: rgba(255,255,255,0.85);
+  padding: 0.8vmin 1.2vmin;
+  border-radius: 1vmin;
+  border: 0.4vmin solid rgba(0,0,0,0.12);
+  font-size: 2.4vmin;
+}
+#choice {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1vmin;
+  box-sizing: border-box;
+  color: #2b003b; /* deep violet for readability */
+  text-shadow: 0.1vmin 0.1vmin 0.2vmin rgba(255,255,255,0.7);
+  word-break: break-word;
+  line-height: 1.05;
+}
+#choice img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
   display: block;
   margin: auto;
-  margin-right: 0;
-  margin-bottom: 1vmin;
-  width: auto;
-  height: auto;
-  font-size: 3vmin;
-  text-align: center;
-  background-color: #edd28f;
-  border: 1vmin black solid;
+  border-radius: 0.8vmin;
+  box-shadow: 0 0.6vmin 2vmin rgba(0,0,0,0.25);
 }
 #spin {
   position: fixed;
@@ -45,48 +73,60 @@ body {
   bottom: 0%;
   margin: auto;
   align-self: center;
-  margin: auto;
   width: 17vmin;
   height: 7vmin;
   font-size: 5vmin;
   text-align: center;
   color: aliceblue;
-  background-color: red; 
+  background-color: #e23b3b; /* slightly softer red */
+  border: none;
+  border-radius: 1vmin;
+  box-shadow: 0 0.6vmin 1.5vmin rgba(0,0,0,0.35);
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
 }
-#inputbox-text {
-  resize: none;
+#spin:active { transform: translateY(0.2vmin) scale(0.995); }
+#spin:hover { box-shadow: 0 1vmin 2vmin rgba(0,0,0,0.45); }
+#inputbox-text, #inputbox-pictures {
+  display: block;
   margin: auto;
   margin-right: 0;
   margin-bottom: 1vmin;
-  width: auto;
-  height: auto;
+  width: 100%;
+  max-width: 80vmin;
   font-size: 3vmin;
-  text-align: center;    
+  text-align: center;
 }
 #input {
   background-color: #edd28f;
   background-size: contain;
-  color: blueviolet;
+  color: #2b003b;
   resize: none;
   margin: auto;
-  margin-right: 0;
-  margin-bottom: 1vmin;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 18vmin;
+  padding: 1vmin;
   font-size: 3vmin;
-  text-align: center;    
+  text-align: left;
+  border-radius: 0.8vmin;
+  border: 0.4vmin solid rgba(0,0,0,0.12);
+  box-shadow: inset 0 0.4vmin 1vmin rgba(0,0,0,0.06);
 }
 #text-loader, #image-loader {
   background-color: #edd28f;
-  background-size: contain;
-  color: blueviolet;
-  resize: none;
+  color: #2b003b;
   margin: auto;
-  margin-right: 0;
-  margin-bottom: 1vmin;
-  width: auto;
-  height: auto;
   font-size: 2vmin;
-  text-align: center; 
-  border: 1vmin black solid
+  text-align: center;
+  border: 0.6vmin solid #000;
+  border-radius: 0.8vmin;
+  padding: 0.6vmin 1vmin;
+  cursor: pointer;
+}
+#text-loader:hover, #image-loader:hover { transform: translateY(-0.2vmin); }
+label { font-size: 2vmin; }
+/* keep input controls compact on small screens */
+@media (max-width: 600px) {
+  #field { width: 92vmin; height: 50vmin; font-size: 6vmin; }
+  #settings { font-size: 2.2vmin; padding: 0.6vmin 0.8vmin; }
 }
