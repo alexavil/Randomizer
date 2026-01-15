@@ -112,21 +112,56 @@ body {
   border: 0.4vmin solid rgba(0,0,0,0.12);
   box-shadow: inset 0 0.4vmin 1vmin rgba(0,0,0,0.06);
 }
-#text-loader, #image-loader {
-  background-color: #edd28f;
-  color: #2b003b;
-  margin: auto;
+/* Style file inputs more robustly across browsers */
+input[type="file"] {
+  display: inline-block;
+  margin: 0.6vmin auto;
   font-size: 2vmin;
   text-align: center;
-  border: 0.6vmin solid #000;
-  border-radius: 0.8vmin;
   padding: 0.6vmin 1vmin;
+  background-color: #edd28f;
+  color: #2b003b;
+  border-radius: 0.8vmin;
+  border: 0.6vmin solid #000;
   cursor: pointer;
+  max-width: 80vmin;
+  box-sizing: border-box;
+  overflow: hidden;
 }
-#text-loader:hover, #image-loader:hover { transform: translateY(-0.2vmin); }
+/* Modern browsers: style the file selector button */
+input[type="file"]::file-selector-button {
+  background: transparent;
+  border: none;
+  padding: 0.2vmin 0.6vmin;
+  margin-right: 0.6vmin;
+  font-size: 2vmin;
+  color: #000;
+  background-color: rgba(0,0,0,0.06);
+  border-radius: 0.6vmin;
+}
+/* Webkit-specific button styling fallback */
+input[type="file"]::-webkit-file-upload-button {
+  background: transparent;
+  border: none;
+  padding: 0.2vmin 0.6vmin;
+  margin-right: 0.6vmin;
+  font-size: 2vmin;
+  color: #000;
+  background-color: rgba(0,0,0,0.06);
+  border-radius: 0.6vmin;
+}
+
+/* Make sure the file input text doesn't break layout */
+input[type="file"]::-webkit-file-upload-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 label { font-size: 2vmin; }
 /* keep input controls compact on small screens */
 @media (max-width: 600px) {
   #field { width: 92vmin; height: 50vmin; font-size: 6vmin; }
   #settings { font-size: 2.2vmin; padding: 0.6vmin 0.8vmin; }
+  input[type="file"] { max-width: 92vmin; }
 }
