@@ -53,7 +53,7 @@ body {
   color: aliceblue;
   background-color: red; 
 }
-#inputbox {
+#inputbox-text {
   resize: none;
   margin: auto;
   margin-right: 0;
@@ -76,7 +76,7 @@ body {
   font-size: 3vmin;
   text-align: center;    
 }
-#loader {
+#text-loader, #image-loader {
   background-color: #edd28f;
   background-size: contain;
   color: blueviolet;

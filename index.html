@@ -12,16 +12,24 @@
   </head>
   <body>
     <div id="settings">
-        <input type="checkbox" id="hide-input">Hide input?
-        <input type="checkbox" id="rem-selected">Remove selected?
+         <label for="mode">Mode:</label>
+        <select id="mode" name="mode">
+          <option value="Text">Text</option>
+          <option value="Pictures">Pictures</option>
+        </select>
+        <label for="hide-input" id="hide-input-check"><input type="checkbox" id="hide-input">Hide input?</label>
+        <label for="rem-selected" id="rem-selected-check"><input type="checkbox" id="rem-selected">Remove selected?</label>
     </div>
     <div id="field">
-        <p id="choice">???</p>
+        <div id="choice">???</div>
     </div>
     <button id="spin">Spin</button>
-    <div id="inputbox">
+    <div id="inputbox-text">
         <textarea id="input" rows="24"></textarea><br>
-        <input type="file" id="loader" accept=".txt">
+        <input type="file" id="text-loader" accept=".txt">
+    </div>
+    <div id="inputbox-pictures">
+        <input type="file" id="image-loader" accept="image/*" multiple>
     </div>
   </body>
 </html>
