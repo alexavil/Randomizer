@@ -9,26 +9,37 @@ window.onload = (ev => {
     document.getElementById("rem-selected").checked = removeSelected;
     document.getElementById("mode").value = "Text";
     document.getElementById("spin").onclick = clickSpin
-
     document.getElementById("mode").addEventListener('change', () => {
         switch (document.getElementById("mode").value) {
             case "Text":
+                choices = [];
+                document.getElementById("input").value = ""
+                document.getElementById("text-loader").value = null
+                document.getElementById("image-loader").value = null
                 document.getElementById("inputbox-text").hidden = hideInput;
                 document.getElementById("inputbox-pictures").hidden = true;
-                document.getElementById("hide-input-check").hidden = false;
-                document.getElementById("hide-input").checked = hideInput;
                 break;
             case "Pictures":
+                choices = [];
+                document.getElementById("input").value = ""
+                document.getElementById("text-loader").value = null
+                document.getElementById("image-loader").value = null
                 document.getElementById("inputbox-text").hidden = true;
-                document.getElementById("inputbox-pictures").hidden = false;
-                document.getElementById("hide-input-check").hidden = true;
+                document.getElementById("inputbox-pictures").hidden = hideInput;
                 break;
         }
     })
 
     document.getElementById("hide-input").addEventListener('change', () => {
-        document.getElementById("inputbox-text").hidden = document.getElementById("hide-input").checked
         hideInput = document.getElementById("hide-input").checked
+        switch (document.getElementById("mode").value) {
+            case "Text":
+                document.getElementById("inputbox-text").hidden = document.getElementById("hide-input").checked
+                break;
+            case "Pictures":
+                document.getElementById("inputbox-pictures").hidden = document.getElementById("hide-input").checked
+                break;
+        }
     })
     document.getElementById("rem-selected").addEventListener('change', () => {
         removeSelected = document.getElementById("rem-selected").checked

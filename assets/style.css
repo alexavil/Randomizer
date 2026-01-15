@@ -1,3 +1,8 @@
+/* Respect programmatic hiding via the hidden attribute */
+[hidden] {
+  display: none !important;
+}
+
 body {
   display: grid;
   background-image: url("bg.jpeg");
@@ -88,10 +93,9 @@ body {
 #spin:active { transform: translateY(0.2vmin) scale(0.995); }
 #spin:hover { box-shadow: 0 1vmin 2vmin rgba(0,0,0,0.45); }
 #inputbox-text, #inputbox-pictures {
-  display: block;
-  margin: auto;
+  /* do not force display here — hidden attribute should control visibility */
   margin-right: 0;
-  margin-bottom: 1vmin;
+  margin-bottom: 20vmin;
   width: 100%;
   max-width: 80vmin;
   font-size: 3vmin;
@@ -112,6 +116,7 @@ body {
   border: 0.4vmin solid rgba(0,0,0,0.12);
   box-shadow: inset 0 0.4vmin 1vmin rgba(0,0,0,0.06);
 }
+
 /* Style file inputs more robustly across browsers */
 input[type="file"] {
   display: inline-block;
@@ -150,7 +155,6 @@ input[type="file"]::-webkit-file-upload-button {
   background-color: rgba(0,0,0,0.06);
   border-radius: 0.6vmin;
 }
-
 /* Make sure the file input text doesn't break layout */
 input[type="file"]::-webkit-file-upload-text {
   white-space: nowrap;
