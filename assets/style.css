@@ -8,15 +8,17 @@ body {
   background-image: url("bg.jpeg");
   background-size: cover;
   background-position: center;
-  overflow: hidden;
+  overflow: auto; /* Changed to auto for mobile scrolling */
   user-select: none;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
-  place-items: center;
-  padding: 3vmin;
+  place-items: start center; /* Changed to start for better mobile stacking */
+  padding: clamp(1vmin, 5vw, 3vmin); /* Responsive padding */
+  box-sizing: border-box;
 }
+
 #field {
   background: linear-gradient(90deg, rgba(190, 255, 59, 1) 0%, rgba(134, 181, 33, 1) 50%, rgba(237, 221, 83, 1) 100%);
   position: relative;
@@ -26,28 +28,34 @@ body {
   text-align: center;
   word-wrap: break-word;
   white-space: normal;
-  width: 80vmin;
-  height: 40vmin;
-  font-size: 8vmin;
+  width: min(80vmin, 95vw); /* Prevent overflow on small screens */
+  height: clamp(30vmin, 40vh, 40vmin); /* Flexible height */
+  max-height: 70vh; /* Prevent too tall on portrait mobile */
+  font-size: clamp(5vmin, 8vw, 8vmin); /* Responsive font size */
   border: 0.8vmin solid #000;
   border-radius: 1.2vmin;
   box-shadow: 0 1vmin 3vmin rgba(0,0,0,0.35);
   overflow: hidden;
+  margin-bottom: 2vmin; /* Space for content below */
 }
+
 #settings {
   position: absolute;
-  top: 2vmin;
+  top: 1vmin; /* Slightly less top margin */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: 1vmin;
   align-items: center;
-  background: rgba(255,255,255,0.85);
-  padding: 0.8vmin 1.2vmin;
+  background: rgba(255,255,255,0.9); /* Slightly more opaque for mobile */
+  padding: clamp(0.5vmin, 2vw, 0.8vmin) clamp(0.8vmin, 3vw, 1.2vmin);
   border-radius: 1vmin;
   border: 0.4vmin solid rgba(0,0,0,0.12);
-  font-size: 2.4vmin;
+  font-size: clamp(1.8vmin, 4vw, 2.4vmin); /* Responsive font */
+  z-index: 10; /* Ensure above field */
+  box-sizing: border-box;
 }
+
 #choice {
   width: 100%;
   height: 100%;
@@ -56,105 +64,113 @@ body {
   justify-content: center;
   padding: 1vmin;
   box-sizing: border-box;
-  color: #2b003b; /* deep violet for readability */
+  color: #2b003b;
   text-shadow: 0.1vmin 0.1vmin 0.2vmin rgba(255,255,255,0.7);
   word-break: break-word;
   line-height: 1.05;
 }
+
 #choice img {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 95%;
+  max-height: 95%;
   object-fit: contain;
   display: block;
   margin: auto;
   border-radius: 0.8vmin;
   box-shadow: 0 0.6vmin 2vmin rgba(0,0,0,0.25);
 }
+
 #spin {
-  position: fixed;
-  left: 0;
-  right: 0%;
-  top: 80%;
-  bottom: 0%;
-  margin: auto;
-  align-self: center;
-  width: 17vmin;
-  height: 7vmin;
-  font-size: 5vmin;
+  position: relative; /* Changed from fixed for better stacking */
+  width: clamp(15vmin, 25vw, 17vmin);
+  height: clamp(6vmin, 10vw, 7vmin);
+  font-size: clamp(4vmin, 6vw, 5vmin);
   text-align: center;
   color: aliceblue;
-  background-color: #e23b3b; /* slightly softer red */
+  background-color: #e23b3b;
   border: none;
   border-radius: 1vmin;
   box-shadow: 0 0.6vmin 1.5vmin rgba(0,0,0,0.35);
   cursor: pointer;
   transition: transform 120ms ease, box-shadow 120ms ease;
+  margin: 2vmin auto; /* Center and space */
+  display: block;
 }
-#spin:active { transform: translateY(0.2vmin) scale(0.995); }
-#spin:hover { box-shadow: 0 1vmin 2vmin rgba(0,0,0,0.45); }
+
+#spin:active { 
+  transform: translateY(0.2vmin) scale(0.995); 
+}
+
+#spin:hover { 
+  box-shadow: 0 1vmin 2vmin rgba(0,0,0,0.45); 
+}
+
 #inputbox-text, #inputbox-pictures {
-  /* do not force display here — hidden attribute should control visibility */
   margin-right: 0;
-  margin-bottom: 20vmin;
+  margin-bottom: clamp(10vmin, 20vh, 20vmin); /* Responsive bottom margin */
   width: 100%;
-  max-width: 80vmin;
-  font-size: 3vmin;
+  max-width: min(80vmin, 95vw);
+  font-size: clamp(2.5vmin, 5vw, 3vmin);
   text-align: center;
 }
+
 #input {
   background-color: #edd28f;
   background-size: contain;
   color: #2b003b;
-  resize: none;
-  margin: auto;
+  resize: vertical; /* Allow vertical resize only */
+  margin: 1vmin auto;
   width: 100%;
-  height: 18vmin;
+  max-width: min(80vmin, 95vw);
+  height: clamp(15vmin, 25vh, 18vmin); /* Flexible height */
   padding: 1vmin;
-  font-size: 3vmin;
+  font-size: clamp(2.5vmin, 5vw, 3vmin);
   text-align: left;
   border-radius: 0.8vmin;
   border: 0.4vmin solid rgba(0,0,0,0.12);
   box-shadow: inset 0 0.4vmin 1vmin rgba(0,0,0,0.06);
+  box-sizing: border-box;
+  display: block;
 }
 
 /* Style file inputs more robustly across browsers */
 input[type="file"] {
-  display: inline-block;
-  margin: 0.6vmin auto;
-  font-size: 2vmin;
+  display: block;
+  margin: 1vmin auto;
+  font-size: clamp(1.8vmin, 4vw, 2vmin);
   text-align: center;
-  padding: 0.6vmin 1vmin;
+  padding: clamp(0.5vmin, 2vw, 0.6vmin) clamp(1vmin, 4vw, 1vmin);
   background-color: #edd28f;
   color: #2b003b;
   border-radius: 0.8vmin;
   border: 0.6vmin solid #000;
   cursor: pointer;
-  max-width: 80vmin;
+  max-width: min(80vmin, 95vw);
   box-sizing: border-box;
-  overflow: hidden;
 }
+
 /* Modern browsers: style the file selector button */
 input[type="file"]::file-selector-button {
-  background: transparent;
+  background: rgba(0,0,0,0.06);
   border: none;
-  padding: 0.2vmin 0.6vmin;
+  padding: clamp(0.2vmin, 1vw, 0.2vmin) clamp(0.6vmin, 2vw, 0.6vmin);
   margin-right: 0.6vmin;
-  font-size: 2vmin;
+  font-size: inherit;
   color: #000;
-  background-color: rgba(0,0,0,0.06);
   border-radius: 0.6vmin;
 }
+
 /* Webkit-specific button styling fallback */
 input[type="file"]::-webkit-file-upload-button {
-  background: transparent;
+  background: rgba(0,0,0,0.06);
   border: none;
-  padding: 0.2vmin 0.6vmin;
+  padding: clamp(0.2vmin, 1vw, 0.2vmin) clamp(0.6vmin, 2vw, 0.6vmin);
   margin-right: 0.6vmin;
-  font-size: 2vmin;
+  font-size: inherit;
   color: #000;
-  background-color: rgba(0,0,0,0.06);
   border-radius: 0.6vmin;
 }
+
 /* Make sure the file input text doesn't break layout */
 input[type="file"]::-webkit-file-upload-text {
   white-space: nowrap;
@@ -162,10 +178,62 @@ input[type="file"]::-webkit-file-upload-text {
   text-overflow: ellipsis;
 }
 
-label { font-size: 2vmin; }
-/* keep input controls compact on small screens */
-@media (max-width: 600px) {
-  #field { width: 92vmin; height: 50vmin; font-size: 6vmin; }
-  #settings { font-size: 2.2vmin; padding: 0.6vmin 0.8vmin; }
-  input[type="file"] { max-width: 92vmin; }
+label { 
+  font-size: clamp(1.8vmin, 4vw, 2vmin); 
+  display: block;
+  margin: 0.5vmin auto;
+}
+
+/* Enhanced mobile styles - expand range and refine */
+@media (max-width: 768px) {
+  body {
+    padding: 2vmin 1vmin;
+    place-items: stretch center; /* Stretch for narrow screens */
+  }
+  
+  #field { 
+    width: min(95vw, 90vmin);
+    height: clamp(28vmin, 45vh, 35vmin);
+    font-size: clamp(6vmin, 12vw, 7vmin);
+    margin: 0 auto 3vmin;
+    border-width: 0.6vmin;
+  }
+  
+  #settings { 
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 90%;
+    font-size: clamp(2vmin, 5vw, 2.2vmin);
+    margin: 0 auto 2vmin;
+  }
+  
+  #spin {
+    width: min(90vw, 20vmin);
+    height: clamp(8vmin, 12vw, 8vmin);
+    font-size: clamp(4.5vmin, 8vw, 5vmin);
+  }
+  
+  #inputbox-text, #inputbox-pictures {
+    margin-bottom: clamp(15vmin, 25vh, 25vmin);
+    font-size: clamp(2.8vmin, 6vw, 3.2vmin);
+  }
+  
+  #input {
+    height: clamp(20vmin, 30vh, 25vmin);
+    font-size: clamp(2.8vmin, 6vw, 3.2vmin);
+  }
+  
+  input[type="file"] {
+    max-width: 95vw;
+    padding: 1vmin 1.5vmin;
+  }
+}
+
+@media (max-width: 480px) {
+  #field {
+    border-radius: 0.8vmin;
+    font-size: clamp(7vmin, 14vw, 8vmin);
+  }
 }
