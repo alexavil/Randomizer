@@ -8,14 +8,14 @@ body {
   background-image: url("bg.jpeg");
   background-size: cover;
   background-position: center;
-  overflow: auto; /* Changed to auto for mobile scrolling */
+  overflow: auto;
   user-select: none;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
-  place-items: start center; /* Changed to start for better mobile stacking */
-  padding: clamp(1vmin, 5vw, 3vmin); /* Responsive padding */
+  place-items: start center;
+  padding: clamp(1vmin, 5vw, 3vmin);
   box-sizing: border-box;
 }
 
@@ -28,31 +28,32 @@ body {
   text-align: center;
   word-wrap: break-word;
   white-space: normal;
-  width: min(80vmin, 95vw); /* Prevent overflow on small screens */
-  height: clamp(30vmin, 40vh, 40vmin); /* Flexible height */
-  max-height: 70vh; /* Prevent too tall on portrait mobile */
-  font-size: clamp(5vmin, 8vw, 8vmin); /* Responsive font size */
+  width: min(80vmin, 95vw);
+  height: clamp(30vmin, 40vh, 40vmin);
+  max-height: 70vh;
+  font-size: clamp(5vmin, 8vw, 8vmin);
   border: 0.8vmin solid #000;
   border-radius: 1.2vmin;
   box-shadow: 0 1vmin 3vmin rgba(0,0,0,0.35);
   overflow: hidden;
-  margin-bottom: 2vmin; /* Space for content below */
+  margin-bottom: 2vmin;
+  padding-top: 6vmin; /* Space for settings panel */
 }
 
 #settings {
   position: absolute;
-  top: 1vmin; /* Slightly less top margin */
+  top: 1vmin;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: 1vmin;
   align-items: center;
-  background: rgba(255,255,255,0.9); /* Slightly more opaque for mobile */
+  background: rgba(255,255,255,0.9);
   padding: clamp(0.5vmin, 2vw, 0.8vmin) clamp(0.8vmin, 3vw, 1.2vmin);
   border-radius: 1vmin;
   border: 0.4vmin solid rgba(0,0,0,0.12);
-  font-size: clamp(1.8vmin, 4vw, 2.4vmin); /* Responsive font */
-  z-index: 10; /* Ensure above field */
+  font-size: clamp(1.8vmin, 4vw, 2.4vmin);
+  z-index: 10;
   box-sizing: border-box;
 }
 
@@ -81,7 +82,7 @@ body {
 }
 
 #spin {
-  position: relative; /* Changed from fixed for better stacking */
+  position: relative;
   width: clamp(15vmin, 25vw, 17vmin);
   height: clamp(6vmin, 10vw, 7vmin);
   font-size: clamp(4vmin, 6vw, 5vmin);
@@ -93,7 +94,7 @@ body {
   box-shadow: 0 0.6vmin 1.5vmin rgba(0,0,0,0.35);
   cursor: pointer;
   transition: transform 120ms ease, box-shadow 120ms ease;
-  margin: 2vmin auto; /* Center and space */
+  margin: 2vmin auto;
   display: block;
 }
 
@@ -107,7 +108,7 @@ body {
 
 #inputbox-text, #inputbox-pictures {
   margin-right: 0;
-  margin-bottom: clamp(10vmin, 20vh, 20vmin); /* Responsive bottom margin */
+  margin-bottom: clamp(10vmin, 20vh, 20vmin);
   width: 100%;
   max-width: min(80vmin, 95vw);
   font-size: clamp(2.5vmin, 5vw, 3vmin);
@@ -118,11 +119,11 @@ body {
   background-color: #edd28f;
   background-size: contain;
   color: #2b003b;
-  resize: vertical; /* Allow vertical resize only */
+  resize: vertical;
   margin: 1vmin auto;
   width: 100%;
   max-width: min(80vmin, 95vw);
-  height: clamp(15vmin, 25vh, 18vmin); /* Flexible height */
+  height: clamp(15vmin, 25vh, 18vmin);
   padding: 1vmin;
   font-size: clamp(2.5vmin, 5vw, 3vmin);
   text-align: left;
@@ -133,7 +134,6 @@ body {
   display: block;
 }
 
-/* Style file inputs more robustly across browsers */
 input[type="file"] {
   display: block;
   margin: 1vmin auto;
@@ -149,7 +149,6 @@ input[type="file"] {
   box-sizing: border-box;
 }
 
-/* Modern browsers: style the file selector button */
 input[type="file"]::file-selector-button {
   background: rgba(0,0,0,0.06);
   border: none;
@@ -160,7 +159,6 @@ input[type="file"]::file-selector-button {
   border-radius: 0.6vmin;
 }
 
-/* Webkit-specific button styling fallback */
 input[type="file"]::-webkit-file-upload-button {
   background: rgba(0,0,0,0.06);
   border: none;
@@ -171,7 +169,6 @@ input[type="file"]::-webkit-file-upload-button {
   border-radius: 0.6vmin;
 }
 
-/* Make sure the file input text doesn't break layout */
 input[type="file"]::-webkit-file-upload-text {
   white-space: nowrap;
   overflow: hidden;
@@ -184,11 +181,11 @@ label {
   margin: 0.5vmin auto;
 }
 
-/* Enhanced mobile styles - expand range and refine */
+/* Mobile styles - settings stays absolute positioned within field */
 @media (max-width: 768px) {
   body {
     padding: 2vmin 1vmin;
-    place-items: stretch center; /* Stretch for narrow screens */
+    place-items: stretch center;
   }
   
   #field { 
@@ -197,16 +194,14 @@ label {
     font-size: clamp(6vmin, 12vw, 7vmin);
     margin: 0 auto 3vmin;
     border-width: 0.6vmin;
+    padding-top: 7vmin; /* More space on mobile */
   }
   
+  /* Keep settings absolute within field on mobile too */
   #settings { 
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
+    top: 0.5vmin;
     width: 90%;
     font-size: clamp(2vmin, 5vw, 2.2vmin);
-    margin: 0 auto 2vmin;
   }
   
   #spin {
@@ -235,5 +230,6 @@ label {
   #field {
     border-radius: 0.8vmin;
     font-size: clamp(7vmin, 14vw, 8vmin);
+    padding-top: 8vmin; /* Extra space for very small screens */
   }
 }
