@@ -15,6 +15,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
   place-items: start center;
+  align-content: start;
   padding: clamp(1vmin, 5vw, 3vmin);
   box-sizing: border-box;
 }
@@ -52,7 +53,7 @@ body {
   padding: clamp(0.5vmin, 2vw, 0.8vmin) clamp(0.8vmin, 3vw, 1.2vmin);
   border-radius: 1vmin;
   border: 0.4vmin solid rgba(0,0,0,0.12);
-  font-size: clamp(1.8vmin, 4vw, 2.4vmin);
+  font-size: clamp(12px, 2vw + 0.6vmin, 2.4vmin);
   z-index: 10;
   box-sizing: border-box;
 }
@@ -108,7 +109,7 @@ body {
 
 #inputbox-text, #inputbox-pictures {
   margin-right: 0;
-  margin-bottom: clamp(10vmin, 20vh, 20vmin);
+  margin-bottom: clamp(2vmin, 3vh, 4vmin);
   width: 100%;
   max-width: min(80vmin, 95vw);
   font-size: clamp(2.5vmin, 5vw, 3vmin);
@@ -137,7 +138,7 @@ body {
 input[type="file"] {
   display: block;
   margin: 1vmin auto;
-  font-size: clamp(1.8vmin, 4vw, 2vmin);
+  font-size: clamp(12px, 4vw, 2vmin);
   text-align: center;
   padding: clamp(0.5vmin, 2vw, 0.6vmin) clamp(1vmin, 4vw, 1vmin);
   background-color: #edd28f;
@@ -175,8 +176,8 @@ input[type="file"]::-webkit-file-upload-text {
   text-overflow: ellipsis;
 }
 
-label { 
-  font-size: clamp(1.8vmin, 4vw, 2vmin); 
+label {
+  font-size: clamp(12px, 4vw, 2vmin);
   display: block;
   margin: 0.5vmin auto;
 }
@@ -198,10 +199,10 @@ label {
   }
   
   /* Keep settings absolute within field on mobile too */
-  #settings { 
+  #settings {
     top: 0.5vmin;
     width: 90%;
-    font-size: clamp(2vmin, 5vw, 2.2vmin);
+    font-size: clamp(12px, 5vw, 2.2vmin);
   }
   
   #spin {
@@ -211,7 +212,7 @@ label {
   }
   
   #inputbox-text, #inputbox-pictures {
-    margin-bottom: clamp(15vmin, 25vh, 25vmin);
+    margin-bottom: clamp(3vmin, 4vh, 6vmin);
     font-size: clamp(2.8vmin, 6vw, 3.2vmin);
   }
   
@@ -230,6 +231,6 @@ label {
   #field {
     border-radius: 0.8vmin;
     font-size: clamp(7vmin, 14vw, 8vmin);
-    padding-top: 8vmin; /* Extra space for very small screens */
+    padding-top: 14vmin; /* Extra space: settings labels wrap to two lines here */
   }
 }

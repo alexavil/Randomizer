@@ -1,6 +1,24 @@
 let hideInput = false;
 let removeSelected = false;
 let choices = []; // array of {type: 'text'|'image', text?, src?, name?}
+let pendingImageLoads = 0;
+
+function parseTextToChoices(rawText) {
+    return rawText
+        .split(/\r\n|\r|\n/)
+        .filter(line => line.trim().length > 0)
+        .map(line => ({type: 'text', text: line}));
+}
+
+function setControlsDisabled(disabled) {
+    document.getElementById("mode").disabled = disabled;
+    document.getElementById("text-loader").disabled = disabled;
+    document.getElementById("image-loader").disabled = disabled;
+}
+
+function updateSpinAvailability() {
+    document.getElementById("spin").disabled = pendingImageLoads > 0;
+}
 
 window.onload = (ev => {
     document.getElementById("inputbox-text").hidden = hideInput;
@@ -28,6 +46,8 @@ window.onload = (ev => {
                 document.getElementById("inputbox-pictures").hidden = hideInput;
                 break;
         }
+        pendingImageLoads = 0;
+        updateSpinAvailability();
     })
 
     document.getElementById("hide-input").addEventListener('change', () => {
@@ -45,14 +65,17 @@ window.onload = (ev => {
         removeSelected = document.getElementById("rem-selected").checked
     })
 
+    document.getElementById("input").addEventListener('input', () => {
+        choices = parseTextToChoices(document.getElementById("input").value);
+    })
+
     document.getElementById("text-loader").addEventListener('change', (ev) => {
         const file = ev.target.files[0];
         if (!file) return;
         const reader = new FileReader();
             reader.onload = (e) => {
                 document.getElementById("input").value = e.target.result;
-                // convert text lines into choice objects
-                choices = document.getElementById("input").value.split("\n").map(line => ({type: 'text', text: line}));
+                choices = parseTextToChoices(e.target.result);
             };
             reader.onerror = (e) => {
                 console.error('Error reading file:', e.target.error);
@@ -65,11 +88,20 @@ window.onload = (ev => {
         const files = ev.target.files;
         if (!files) return;
         Array.from(files).forEach(file => {
+            pendingImageLoads++;
+            updateSpinAvailability();
             var reader = new FileReader();
             reader.onload = (e) => {
                 // store as image choice
                 choices.push({type: 'image', src: e.target.result, name: file.name});
                 console.log('image added', file.name);
+                pendingImageLoads--;
+                updateSpinAvailability();
+            }
+            reader.onerror = (e) => {
+                console.error('Error reading file:', e.target.error);
+                pendingImageLoads--;
+                updateSpinAvailability();
             }
             reader.readAsDataURL(file);
         });
@@ -108,11 +140,13 @@ function renderChoice(choice) {
 
 clickSpin = function() {
     document.getElementById("spin").hidden = true
+    setControlsDisabled(true);
     let res = undefined;
 
     if (choices.length === 0) {
         res = {type: 'text', text: 'No input found!'};
         document.getElementById("spin").hidden = false
+        setControlsDisabled(false);
         renderChoice(res);
         return;
     }
@@ -127,6 +161,7 @@ clickSpin = function() {
         clearInterval(rapid);
         res = choices[random];
         document.getElementById("spin").hidden = false
+        setControlsDisabled(false);
         renderChoice(res);
 
         if (removeSelected === true) {
