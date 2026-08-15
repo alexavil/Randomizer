@@ -5,7 +5,7 @@
 
 body {
   display: grid;
-  background-image: url("bg.jpeg");
+  background-image: linear-gradient(rgba(20, 10, 5, 0.4), rgba(20, 10, 5, 0.5)), url("bg.jpeg");
   background-size: cover;
   background-position: center;
   overflow: auto;
@@ -15,29 +15,69 @@ body {
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
   place-items: start center;
+  align-content: start;
   padding: clamp(1vmin, 5vw, 3vmin);
   box-sizing: border-box;
 }
 
 #field {
-  background: linear-gradient(90deg, rgba(190, 255, 59, 1) 0%, rgba(134, 181, 33, 1) 50%, rgba(237, 221, 83, 1) 100%);
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  word-wrap: break-word;
-  white-space: normal;
   width: min(80vmin, 95vw);
-  height: clamp(30vmin, 40vh, 40vmin);
-  max-height: 70vh;
-  font-size: clamp(5vmin, 8vw, 8vmin);
-  border: 0.8vmin solid #000;
-  border-radius: 1.2vmin;
-  box-shadow: 0 1vmin 3vmin rgba(0,0,0,0.35);
-  overflow: hidden;
   margin-bottom: 2vmin;
   padding-top: 6vmin; /* Space for settings panel */
+}
+
+#wheel-wrap {
+  position: relative;
+  width: min(70vmin, 90vw);
+  height: min(70vmin, 90vw);
+  margin: 1vmin auto 2vmin;
+}
+
+#wheel {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 0.8vmin solid #000;
+  box-shadow: 0 1vmin 3vmin rgba(0,0,0,0.35);
+  background: #edd28f;
+  transform: rotate(0deg);
+  transition: transform 5s cubic-bezier(0.12, 0.67, 0.1, 1);
+}
+
+.wheel-slice {
+  transition: filter 200ms ease;
+}
+
+.wheel-slice.winner {
+  stroke: #fff;
+  stroke-width: 4;
+  filter: drop-shadow(0 0 0.6vmin rgba(255,255,255,0.9));
+}
+
+.wheel-label {
+  fill: #2b003b;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+#pointer {
+  position: absolute;
+  top: -1.4vmin;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 2vmin solid transparent;
+  border-right: 2vmin solid transparent;
+  border-top: 3.2vmin solid #e23b3b;
+  filter: drop-shadow(0 0.3vmin 0.4vmin rgba(0,0,0,0.4));
+  z-index: 5;
 }
 
 #settings {
@@ -52,28 +92,35 @@ body {
   padding: clamp(0.5vmin, 2vw, 0.8vmin) clamp(0.8vmin, 3vw, 1.2vmin);
   border-radius: 1vmin;
   border: 0.4vmin solid rgba(0,0,0,0.12);
-  font-size: clamp(1.8vmin, 4vw, 2.4vmin);
+  font-size: clamp(12px, 2vw + 0.6vmin, 2.4vmin);
   z-index: 10;
   box-sizing: border-box;
 }
 
-#choice {
-  width: 100%;
-  height: 100%;
-  display: flex;
+#result {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1vmin;
+  max-width: min(80vmin, 95vw);
+  min-height: 1.4em;
+  margin: 0 auto;
+  padding: 1.5vmin 4vmin;
   box-sizing: border-box;
+  background: rgba(255, 250, 235, 0.96);
+  border: 0.5vmin solid #000;
+  border-radius: 1.6vmin;
+  box-shadow: 0 0.8vmin 2.2vmin rgba(0,0,0,0.5);
+  font-size: clamp(4vmin, 6vw, 6vmin);
+  font-weight: 600;
   color: #2b003b;
-  text-shadow: 0.1vmin 0.1vmin 0.2vmin rgba(255,255,255,0.7);
   word-break: break-word;
+  text-align: center;
   line-height: 1.05;
 }
 
-#choice img {
-  max-width: 95%;
-  max-height: 95%;
+#result img {
+  max-width: 60vmin;
+  max-height: 30vmin;
   object-fit: contain;
   display: block;
   margin: auto;
@@ -108,7 +155,7 @@ body {
 
 #inputbox-text, #inputbox-pictures {
   margin-right: 0;
-  margin-bottom: clamp(10vmin, 20vh, 20vmin);
+  margin-bottom: clamp(2vmin, 3vh, 4vmin);
   width: 100%;
   max-width: min(80vmin, 95vw);
   font-size: clamp(2.5vmin, 5vw, 3vmin);
@@ -137,7 +184,7 @@ body {
 input[type="file"] {
   display: block;
   margin: 1vmin auto;
-  font-size: clamp(1.8vmin, 4vw, 2vmin);
+  font-size: clamp(12px, 4vw, 2vmin);
   text-align: center;
   padding: clamp(0.5vmin, 2vw, 0.6vmin) clamp(1vmin, 4vw, 1vmin);
   background-color: #edd28f;
@@ -175,8 +222,8 @@ input[type="file"]::-webkit-file-upload-text {
   text-overflow: ellipsis;
 }
 
-label { 
-  font-size: clamp(1.8vmin, 4vw, 2vmin); 
+label {
+  font-size: clamp(12px, 4vw, 2vmin);
   display: block;
   margin: 0.5vmin auto;
 }
@@ -188,20 +235,26 @@ label {
     place-items: stretch center;
   }
   
-  #field { 
+  #field {
     width: min(95vw, 90vmin);
-    height: clamp(28vmin, 45vh, 35vmin);
-    font-size: clamp(6vmin, 12vw, 7vmin);
     margin: 0 auto 3vmin;
-    border-width: 0.6vmin;
     padding-top: 7vmin; /* More space on mobile */
+  }
+
+  #wheel-wrap {
+    width: min(78vmin, 88vw);
+    height: min(78vmin, 88vw);
+  }
+
+  #wheel {
+    border-width: 0.6vmin;
   }
   
   /* Keep settings absolute within field on mobile too */
-  #settings { 
+  #settings {
     top: 0.5vmin;
     width: 90%;
-    font-size: clamp(2vmin, 5vw, 2.2vmin);
+    font-size: clamp(12px, 5vw, 2.2vmin);
   }
   
   #spin {
@@ -211,7 +264,7 @@ label {
   }
   
   #inputbox-text, #inputbox-pictures {
-    margin-bottom: clamp(15vmin, 25vh, 25vmin);
+    margin-bottom: clamp(3vmin, 4vh, 6vmin);
     font-size: clamp(2.8vmin, 6vw, 3.2vmin);
   }
   
@@ -228,8 +281,10 @@ label {
 
 @media (max-width: 480px) {
   #field {
-    border-radius: 0.8vmin;
-    font-size: clamp(7vmin, 14vw, 8vmin);
-    padding-top: 8vmin; /* Extra space for very small screens */
+    padding-top: 14vmin; /* Extra space: settings labels wrap to two lines here */
+  }
+
+  #result {
+    font-size: clamp(5vmin, 8vw, 6.5vmin);
   }
 }
